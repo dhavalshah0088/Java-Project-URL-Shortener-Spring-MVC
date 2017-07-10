@@ -1,0 +1,20 @@
+//USER
+
+create table user(
+id INT IDENTITY NOT NULL,
+username VARCHAR(100) NOT NULL,
+password VARCHAR(100) NOT NULL,
+PRIMARY KEY(id)
+);
+
+//Links
+
+create table Links(
+linkId INT IDENTITY NOT NULL,
+userId INT NOT NULL,
+longUrl VARCHAR(200) NOT NULL,
+shortUrl VARCHAR(200) NOT NULL,
+clicks INT NOT NULL,
+PRIMARY KEY(linkId),
+FOREIGN KEY(userId) REFERENCES user(id)
+);

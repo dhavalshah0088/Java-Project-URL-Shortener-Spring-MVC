@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+		<property name="url"
+			value="jdbc:hsqldb:hsql://localhost/cpsc476;ife
+			xists=true" />
+		<property name="username" value="SA" />
+		<property name="password" value="Passw0rd" />
+		<property name="initialSize" value="15" />
+		<property name="maxActive" value="50" />
+		<property name="maxIdle" value="15" />
+		<property name="minIdle" value="15" />
+		<property name="maxWait" value="50" />
+	</bean>
+
+
+
+	<bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+	<bean id="UserServiceImplementation" class="com.project3.implementation.UserServiceImplementation"
+		scope="singleton">
+		<property name="jdbctemplate" ref="jdbctemplate"></property>
+	</bean>
+<bean id="LinkServiceImplementation" class="com.project3.implementation.LinkServiceImplementation"
+		scope="singleton">
+		<property name="jdbctemplate" ref="jdbctemplate"></property>
+	</bean>
+
+
+</beans>
